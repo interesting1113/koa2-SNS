@@ -1,6 +1,6 @@
 const { Blog, User } = require('./model')
 
-!(async function() {
+!(async function () {
   // 查询一条记录
   const hyde = await User.findOne({
     where: {
@@ -96,7 +96,8 @@ const { Blog, User } = require('./model')
     'userListWithBlog',
     userListWithBlog.row.map(user => {
       const userVal = user.dataValues
-      userVal.blog = userVal.blog.dataValues
+      console.log('userVal...', userVal)
+      userVal.blogs = userVal.blogs.map(blog => blog.dataValues)
       return userVal
     })
   )
