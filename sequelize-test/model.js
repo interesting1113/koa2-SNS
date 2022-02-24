@@ -12,10 +12,39 @@ const User = seq.define('user', {
     allowNull: false
   },
   nickName: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    comment: 'nickname'
   }
 });
 
+// Blog, table name: blog
+const Blog = seq.define('blog', {
+  title: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  content: {
+    type: Sequelize.TEXT,
+    allowNull: false
+  },
+  userId: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  }
+})
+
+// foreign key
+Blog.belongsTo(User, {
+  // Blogs.userId -> User.id
+  foreignKey: 'userId'
+})
+
+User.hasMany(Blog, {
+  // Blogs.userId -> User.id
+  foreignKey: 'userId'
+})
+
 module.exports = {
-  User
+  User,
+  Blog
 }
