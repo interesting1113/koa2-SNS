@@ -3,6 +3,8 @@
  * @author sylviayang
  */
 
+const { isProd } = require('../utils/env') 
+
 let MYSQL_CONF = {
   host: 'localhost',
   user: 'root',
