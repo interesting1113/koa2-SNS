@@ -4,6 +4,7 @@
  */
 
 const { User } = require('../db/model/index')
+const { formatUser } = require('./_format')
 
 /**
  * 获取用户信息
@@ -20,7 +21,7 @@ async function getUserInfo(userName, password) {
   }
   // 查询
   const result = await User.findOne({
-    attributes: ['id', 'userName', 'nickName', 'pucture', 'city'],
+    attributes: ['id', 'userName', 'nickName', 'picture', 'city'],
     where: whereOpt
   })
   // 未找到
@@ -29,8 +30,9 @@ async function getUserInfo(userName, password) {
   }
 
   // 格式化
-  
-  return  result.dataValues
+  const formatRes = formatUser(result.dataValues)
+
+  return  formatRes
 }
 
 module.exports = {

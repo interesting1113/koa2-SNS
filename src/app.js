@@ -56,7 +56,7 @@ app.use(session({
 
 // routes
 app.use(index.routes(), index.allowedMethods())
-app.use(userAPIRouter.route().userAPIRouter.allowedMethods())
+app.use(userAPIRouter.routes(), userAPIRouter.allowedMethods())
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods())
 app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods()) // 404 page在最后
 
