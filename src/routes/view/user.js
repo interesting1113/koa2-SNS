@@ -10,13 +10,13 @@ const router = require('koa-router')()
  * @param {Object} ctx ctx
  */
 function getLoginInfo(ctx) {
-  const data = {
+  let data = {
     isLogin: false // 默认未登陆
   }
 
   const userInfo = ctx.session.userInfo
   if (userInfo) {
-    let data = {
+    data = {
       isLogin: true,
       userName: userInfo.userName
     }
