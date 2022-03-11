@@ -3,8 +3,8 @@
  * @author sylviayang
  */
 
- const { ErrorModel } = require('../model/ResModel')
- const { jsonSchemaFileInfo, loginCheckFailInfo } = require('../model/ErrorInfo')
+const { ErrorModel } = require('../model/ResModel')
+const { jsonSchemaFileInfo, loginCheckFailInfo } = require('../model/ErrorInfo')
 
 /**
  * API 登陆验证
