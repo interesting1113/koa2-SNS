@@ -3,10 +3,10 @@
  * @author sylviayang
  */
 
- const seq = require('../seq')
- const { INTEGER, STRING, TEXT } = require('../types')
+const seq = require('../seq')
+const { INTEGER, STRING, TEXT } = require('../types')
 
- const Blog = seq.define('blog', {
+const Blog = seq.define('blog', {
   userId: {
     type: INTEGER,
     allowNull: false,
@@ -21,6 +21,6 @@
     type: STRING,
     comment: '图片地址'
   }
- })
+})
 
- module.exports = Blog
+module.exports = Blog
