@@ -4,7 +4,7 @@
  */
 
 const { Blog, User } = require('../db/model/index')
-const { formatUser } = require('./_format')
+const { formatUser, formatBlog } = require('./_format')
 
 /**
  * 
@@ -48,7 +48,8 @@ async function getBlogListByUser(
 
   // 获取dataValues
   let blogList = result.rows.map(row => row.dataValues)
-
+  
+  blogList = formatBlog(blogList)
   blogList = blogList.map(blogItem => {
     const user = blogItem.user.dataValues
     blogItem.user = formatUser(user)
