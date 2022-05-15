@@ -51,11 +51,11 @@ function _formatDBTime(obj) {
  * @param {Array|Object} list 
  */
 function formatBlog(list) {
- if (list == null) return
- if (list instanceof Array) {
-   return list.map(_formatDBTime)
- }
- return _formatDBTime (list)
+  if (list == null) return
+  if (list instanceof Array) {
+    return list.map(_formatDBTime)
+  }
+  return _formatDBTime (list)
 }
 
 module.exports = {
