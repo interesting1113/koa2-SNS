@@ -19,6 +19,4 @@
   expect(data).toHaveProperty('pageSize')
   expect(data).toHaveProperty('pageIndex')
   expect(data).toHaveProperty('count')
-
-  
  })
