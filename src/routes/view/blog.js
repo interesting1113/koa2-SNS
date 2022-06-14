@@ -37,9 +37,13 @@ router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
     // 用户名存在
     curUserInfo = existResult.data
   }
+
   // 获取第一页数据 
   const result = await getProfileBlogList(curUserName, 0)
   const { isEmpty, blogList, pageSize, pageIndex, count } = result.data
+
+  // 获取粉丝
+  
 
   await ctx.render('profile', {
     blogData: {
