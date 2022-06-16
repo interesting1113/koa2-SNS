@@ -4,6 +4,7 @@
  */
 
 const { User, UserRelation } = require('../db/model/index')
+const { formatUser } = require('./_format')
 /**
  * 过去关注该用户的用户列表， 即该用户的粉丝
  * @param {followerId} followerId 被关注人的id
@@ -12,7 +13,7 @@ async function getUserfByFollower(followerId) {
   const result = await User.findAndCountAll({
     attributes: ['id', 'userName', 'nickName', 'pic'],
     order: [
-      'id', 'desc'
+      ['id', 'desc']
     ],
     include: [
       {
@@ -21,6 +22,15 @@ async function getUserfByFollower(followerId) {
       }
     ]
   })
+
+  // 格式化
+  let userList = result.row.map(row => row.dataValues)
+  userList = formatUser(userList)
+
+  return {
+    count: result.count,
+    userList
+  }
 }
 
 module.exports = {
