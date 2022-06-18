@@ -12,7 +12,7 @@ const { getBlogListStr } = require('../../utils/blog')
 router.prefix('/api/profile')
 
 // 加载更多
-router.get('/loadMore/:userName/:pageIndex', loginCheck, async(ctx, next) => {
+router.get('/loadMore/:userName/:pageIndex', loginCheck, async (ctx, next) => {
   const { userName, pageIndex } = ctx.params
   pageIndex = parseInt(pageIndex)
   const result = await getProfileBlogList(userName, pageIndex)
@@ -23,10 +23,11 @@ router.get('/loadMore/:userName/:pageIndex', loginCheck, async(ctx, next) => {
 })
 
 // 关注
-router.post('/follow', loginCheck, (ctx, next) => {
+router.post('/follow', loginCheck, async (ctx, next) => {
   const { id: myUserId } = ctx.session.userInfo
   const { userId: curUserId } = ctx.request.body
   ctx.body = await follow(myUserId, curUserId)
 
 })
+
 module.exports = router
