@@ -3,8 +3,8 @@
  * @author sylviayang
  */
 
- const { get, set } = require('./_redis')
- const { getBlogListByUser } = require('../services/blog')
+const { get, set } = require('./_redis')
+const { getBlogListByUser } = require('../services/blog')
 
 // redis key 前缀
 const KEY_PREFIX = 'weibo:square:'
