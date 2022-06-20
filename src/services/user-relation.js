@@ -48,7 +48,11 @@ async function addFollower(userId, followerId) {
 }
 
 async function deleteFollower(userId, followerId) {
-
+  const result = await UserRelation.destory({
+    userId,
+    followerId
+  })
+  return result > 0
 }
 
 module.exports = {
