@@ -47,6 +47,9 @@ async function addFollower(userId, followerId) {
   return result.dataValues
 }
 
+async function deleteFollower(userId, followerId) {
+
+}
 
 module.exports = {
   getUserfByFollower,
