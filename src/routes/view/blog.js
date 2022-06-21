@@ -47,6 +47,9 @@ router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
   const fansResult = await getFans(curUserInfo.id)
   const { fansCount, fansList } = fansResult.data
 
+  // 获取关注人列表
+  
+
   // 我是否关注了此人
   const amIFollowed = fansList.some(item => {
     return item.userName === myUserName

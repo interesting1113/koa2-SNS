@@ -21,6 +21,14 @@ async function getFans(userId) {
 }
 
 /**
+ * 根据userId获取关注列表
+ * @param {number} userId 
+ */
+async function getFollowers(userId) {
+
+}
+
+/**
  * 关注
  * @param {number} myUserId 当前登陆的用户 id
  * @param {number} curUserId 要被关注的用户 id
@@ -49,5 +57,6 @@ async function unFollow(myUserId, curUserId) {
 
 module.default = {
   getFans,
+  getFollowers,
   follow
 }
