@@ -4,7 +4,12 @@
  */
 
 const { SuccessModel, ErrorModel } = require('../model/ResModel')
-const { getUserfByFollower, addFollower, deleteFollower } = require('../services/user-relation')
+const { 
+  getUserfByFollower, 
+  getFollowersByUser, 
+  addFollower, 
+  deleteFollower 
+} = require('../services/user-relation')
 const { addFollowerFailInfo, deleteFollowerFailInfo } = require('../model/ErrorInfo')
 
 /**
@@ -25,7 +30,12 @@ async function getFans(userId) {
  * @param {number} userId 
  */
 async function getFollowers(userId) {
+  const { count, userList } = await getFollowersByUser(userId)
 
+  return new SuccessModel({
+    count,
+    followerList: userList
+  })
 }
 
 /**
