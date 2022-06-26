@@ -5,6 +5,7 @@
 
 const { User, UserRelation } = require('../db/model/index')
 const { formatUser } = require('./_format')
+const Sequelize = require('sequelize')
 
 /**
  * 过去关注该用户的用户列表， 即该用户的粉丝
@@ -19,7 +20,12 @@ async function getUserfByFollower(followerId) {
     include: [
       {
         model: UserRelation,
-        where: followerId
+        where: {
+          followerId,
+          userId: {
+            [Sequelize.Op.ne]: followerId
+          }
+        }
       }
     ]
   })
@@ -50,7 +56,10 @@ async function getFollowersByUser(userId) {
       }
     ],
     where: {
-      userId
+      userId,
+      followerId: {
+        [Sequelize.Op.ne]: userId
+      }
     }
   })
 
