@@ -11,7 +11,27 @@ const { getFans, getFollowers } = require('../../controller/user-relation')
 
 // 首页
 router.get('/', loginRedirect, async (ctx, next) => {
-  await ctx.render('index', {})
+  await ctx.render('index', {
+    userData: {
+        userInfo,
+        fansData: {
+            count: fansCount,
+            list: fansList
+        },
+        followersData: {
+            count: followersCount,
+            list: followersList
+        },
+        atCount
+    },
+    blogData: {
+        isEmpty,
+        blogList,
+        pageSize,
+        pageIndex,
+        count
+    }
+})
 })
 
 // 个人主页
