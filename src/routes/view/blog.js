@@ -8,30 +8,38 @@ const { loginRedirect } = require('../../middlewares/loginChecks')
 const { getProfileBlogList } = require('../../controller/blog-profile')
 const { isExist } = require('../../controller/user')
 const { getFans, getFollowers } = require('../../controller/user-relation')
+const { getHomeBlogList } = require('../../controller/blog-home')
 
 // 首页
 router.get('/', loginRedirect, async (ctx, next) => {
+  const userInfo = ctx.session.userInfo
+  const { id: userId } = userInfo
+
+  // 获取第一页数据
+  const result = await getHomeBlogList(userId)
+  const { isEmpty, blogList, pageSize, pageIndex, count } = result.data
+
   await ctx.render('index', {
     userData: {
-        userInfo,
-        fansData: {
-            count: fansCount,
-            list: fansList
-        },
-        followersData: {
-            count: followersCount,
-            list: followersList
-        },
-        atCount
+      userInfo,
+      fansData: {
+        count: fansCount,
+        list: fansList
+      },
+      followersData: {
+        count: followersCount,
+        list: followersList
+      },
+      atCount
     },
     blogData: {
-        isEmpty,
-        blogList,
-        pageSize,
-        pageIndex,
-        count
+      isEmpty,
+      blogList,
+      pageSize,
+      pageIndex,
+      count
     }
-})
+  })
 })
 
 // 个人主页
