@@ -37,7 +37,7 @@ async function getHomeBlogList(userId, pageIndex = 0) {
     {
       userId,
       pageIndex,
-      PAGE_SIZE
+      pageSize: PAGE_SIZE
     }
   )
   const { count, blogList } = result
