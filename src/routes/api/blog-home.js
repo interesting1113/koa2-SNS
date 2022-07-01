@@ -34,16 +34,16 @@ router.get('/loadMore/:pageIndex', loginCheck, async(ctx, next) => {
 // 加载第一页数据
 test('首页', async () => {
   const res = await server
-               .get(`/api/blog/loadMore/0`)
-               .set('cookie', Z_COOKIE)
- expect(res.body.errno).toBe(0)
+    .get(`/api/blog/loadMore/0`)
+    .set('cookie', Z_COOKIE)
+  expect(res.body.errno).toBe(0)
 
- const data = res.body.data
- expect(data).toHaveProperty('isEmpty')
- expect(data).toHaveProperty('blogList')
- expect(data).toHaveProperty('pageSize')
- expect(data).toHaveProperty('pageIndex')
- expect(data).toHaveProperty('count')
+  const data = res.body.data
+  expect(data).toHaveProperty('isEmpty')
+  expect(data).toHaveProperty('blogList')
+  expect(data).toHaveProperty('pageSize')
+  expect(data).toHaveProperty('pageIndex')
+  expect(data).toHaveProperty('count')
 })
 
 
