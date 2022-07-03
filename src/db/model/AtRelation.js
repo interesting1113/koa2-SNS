@@ -3,10 +3,10 @@
  * @author sylviayang
  */
 
- const seq = require('../seq')
- const { INTEGER, BOOLEAN } = require('../types')
+const seq = require('../seq')
+const { INTEGER, BOOLEAN } = require('../types')
 
- const atRelation = seq.define('atRelation', {
+const atRelation = seq.define('atRelation', {
   userId: {
     type: INTEGER,
     allowNull: false,
