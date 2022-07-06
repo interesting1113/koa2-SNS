@@ -3,7 +3,8 @@
  * @author sylviayang
  */
 
-const { AtRelation } = require('../db/model')
+const { PAGE_SIZE } = require('../conf/constant')
+const { AtRelation, Blog } = require('../db/model')
 
 /**
  * 
@@ -31,7 +32,29 @@ async function getAtRelationCount(userId) {
   return result.count
 }
 
+/**
+ * 获取用户的微博列表
+ * @param {Object} param0 查询条件
+ */
+async function getAtUserBlogList({ userId, pageIndex, pageIndex = 10}) {
+  const result = await Blog.findAndCountAll({
+    limit: PAGE_SIZE,
+    offset: PAGE_SIZE * pageIndex,
+    order: [
+      ['id', 'desc']
+    ],
+    include: [
+      {
+        model: AtRelation,
+        attributes: ['userId', 'blogId'],
+        where: { userId }
+      }
+    ]
+  })
+}
+
 module.exports = {
   createAtRelation,
-  getAtRelationCount
+  getAtRelationCount,
+  getAtUserBlogList
 }

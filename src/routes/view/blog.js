@@ -32,11 +32,6 @@ router.get('/', loginRedirect, async (ctx, next) => {
   const atCountResult = await getAtMeCount(userId)
   const { count: atCount } = atCountResult.data
 
-
-  // 获取第一页数据
-  const result = await getHomeBlogList(userId)
-  const { isEmpty, blogList, pageSize, pageIndex, count } = result.data
-
   await ctx.render('index', {
     userData: {
       userInfo,
@@ -146,4 +141,24 @@ router.get('/square', loginRedirect, async (ctx, next) => {
   })
 })
 
+// atMe
+router.get('/at-me', loginRedirect, async (ctx, next) => {
+  const { id: userId } = ctx.session.userInfo
+
+  // 获取 @ 数量
+  const atCountResult = await getAtMeCount(userId)
+  const { count: atCount } = atCountResult.data
+
+  await ctx.render('atMe', {
+    atCount,
+    blogData: {
+
+    }
+  })
+
+  if (atCount > 0) {
+    
+  }
+
+})
 module.exports = router

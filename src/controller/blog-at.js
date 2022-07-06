@@ -16,6 +16,16 @@ async function getAtMeCount(userId) {
   })
 }
 
+/**
+ * 获取 @ 用户的微博列表
+ * @param {nubmer} userId 
+ * @param {number} pageIndex 
+ */
+async function getAtMeBlogList(userId, pageIndex = 0) {
+
+}
+
 module.exports = {
-  getAtMeCount
+  getAtMeCount,
+  getAtMeBlogList
 }
