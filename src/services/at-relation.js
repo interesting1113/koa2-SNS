@@ -3,8 +3,8 @@
  * @author sylviayang
  */
 
-const { PAGE_SIZE } = require('../conf/constant')
-const { AtRelation, Blog } = require('../db/model')
+const { AtRelation, Blog, User } = require('../db/model')
+const { formatBlog, formatUser } = require('./_format')
 
 /**
  * 
@@ -36,21 +36,39 @@ async function getAtRelationCount(userId) {
  * 获取用户的微博列表
  * @param {Object} param0 查询条件
  */
-async function getAtUserBlogList({ userId, pageIndex, pageIndex = 10}) {
+async function getAtUserBlogList({ userId, pageIndex, pageSize = 10}) {
   const result = await Blog.findAndCountAll({
-    limit: PAGE_SIZE,
-    offset: PAGE_SIZE * pageIndex,
+    limit: pageSize,
+    offset: pageSize * pageIndex,
     order: [
       ['id', 'desc']
     ],
     include: [
+      // @ 关系
       {
         model: AtRelation,
         attributes: ['userId', 'blogId'],
         where: { userId }
+      },
+      // user
+      {
+        model: User,
+        attributes: ['userName', 'nickName', 'picture']
       }
     ]
   })
+
+  // 格式化
+  let blogList = result.rows.map(row => row.dataValues)
+  blogList = formatBlog(blogList)
+  blogList = blogList.map(blogItem => {
+    blogItem.user = formatUser(blogItem.user.dataValues)
+    return blogItem
+  })
+  return {
+    count: result.count,
+    blogList
+  }
 }
 
 module.exports = {

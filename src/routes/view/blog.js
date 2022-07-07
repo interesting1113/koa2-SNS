@@ -9,7 +9,7 @@ const { getProfileBlogList } = require('../../controller/blog-profile')
 const { isExist } = require('../../controller/user')
 const { getFans, getFollowers } = require('../../controller/user-relation')
 const { getHomeBlogList } = require('../../controller/blog-home')
-const { getAtMeCount } = require('../../controller/blog-at')
+const { getAtMeCount, getAtMeBlogList } = require('../../controller/blog-at')
 
 // 首页
 router.get('/', loginRedirect, async (ctx, next) => {
@@ -149,15 +149,22 @@ router.get('/at-me', loginRedirect, async (ctx, next) => {
   const atCountResult = await getAtMeCount(userId)
   const { count: atCount } = atCountResult.data
 
+  const result = await getAtMeBlogList(userId)
+  const { isEmpty, blogList, pageSize, pageIndex, count } = result.data
+
   await ctx.render('atMe', {
     atCount,
     blogData: {
-
+      isEmpty,
+      blogList,
+      pageSize, 
+      pageIndex,
+      count
     }
   })
 
   if (atCount > 0) {
-    
+
   }
 
 })
